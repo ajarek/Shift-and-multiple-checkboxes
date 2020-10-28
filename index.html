@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shift i wiele pól wyboru</title>
+    <style>
+        body {
+            margin: 20px;
+            background: yellow;
+            display: flex;
+            justify-content: center;
+        }
+
+        .checkbox {
+            width: 800px;
+            height: 80px;
+            font-size: 2rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            border: 1px solid lightgray;
+            background: white;
+        }
+
+        input {
+            margin: 20px;
+            width: 30px;
+            height: 30px;
+
+        }
+
+        input:checked+p {
+            text-decoration: line-through;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="inbox">
+        <div class="checkbox">
+            <input type="checkbox" name="" id="">
+            <p>To jest układ skrzynki odbiorczej</p>
+        </div>
+        <div class="checkbox">
+            <input type="checkbox" name="" id="">
+            <p>Sprawdź jedną pozycję</p>
+        </div>
+        <div class="checkbox">
+            <input type="checkbox" name="" id="">
+            <p>Przytrzymaj klawisz Shift</p>
+        </div>
+        <div class="checkbox">
+            <input type="checkbox" name="" id="">
+            <p>Sprawdź niższą pozycję</p>
+        </div>
+        <div class="checkbox">
+            <input type="checkbox" name="" id="">
+            <p>Wszystko pomiędzy powinno być również ustawione na zaznaczone</p>
+        </div>
+        <div class="checkbox">
+            <input type="checkbox" name="" id="">
+            <p>Spróbuj to zrobić bez żadnych bibliotek</p>
+        </div>
+        <div class="checkbox">
+            <input type="checkbox" name="" id="">
+            <p>Po prostu zwykły JavaScript</p>
+        </div>
+        <div class="checkbox">
+            <input type="checkbox" name="" id="">
+            <p>Powodzenia!</p>
+        </div>
+        <div class="checkbox">
+            <input type="checkbox" name="" id="">
+            <p>Nie zapomnij opublikować swojego wyniku na Twitterze!</p>
+        </div>
+        
+    </div>
+    <div class="logo"></div><a href="mailto:ajarek@poczta.onet.pl" ><img src="logo2.PNG" alt="husky"></a></div>  
+    <script>
+        const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+
+        let lastChecked;
+
+        function handleCheck(e) {
+
+            let inBetween = false;
+            if (e.shiftKey && this.checked) {
+                checkboxes.forEach(checkbox => {
+
+                    if (checkbox === this || checkbox === lastChecked) {
+                        inBetween = !inBetween;
+                    }
+                    if (inBetween) {
+                        checkbox.checked = true;
+                    }
+                })
+            }
+            lastChecked = this;
+        }
+        checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+    </script>
+</body>
+
+</html>
